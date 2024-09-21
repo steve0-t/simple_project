@@ -5,9 +5,15 @@ def main():
 
 
 def validate(s):
-    if checkers.is_email('test@domain.dev'):
-        return "Valid"
-    else:
+    # for testing:
+    # malan at harvard dot edu
+    # malan@@@harvard.edu
+    try:
+        check = validators.email(s)
+        if checkers.is_email(check):
+            return "Valid"
+        raise ValueError
+    except ValueError:
         return "Invalid"
 
 
