@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+
+    {% if all and prices and usd and balance and total %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show mx-auto w-auto" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+
+        <h2 class="mb-5 custom-h2"><strong>Your portfolio</strong></h2>
+        <div class="table-responsive">
+            <table class="table table-light table-striped table-hover table-sm">
+                <thead>
+                    <div>
+                        <tr>
+                            <th scope="col" class="custom-header">Symbol</th>
+                            <th scope="col" class="custom-header">Shares</th>
+                            <th scope="col" class="custom-header">Price</th>
+                            <th scope="col" class="custom-header">Total</th>
+                        </tr>
+                    </div>
+                </thead>
+                <tbody>
+                    {% for stock in all %}
+                        <tr>
+                            <td class="custom-td"> {{ stock['symbol'] }} </td>
+                            <td class="custom-td"> {{ stock['shares'] }} </td>
+                            <td class="custom-td"> {{ usd(prices[stock['symbol']]) }} </td>
+                            <td class="custom-td"> {{ usd(prices[stock['symbol']] * stock['shares']) }} </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="justify-content-center">
+            <div class="mt-5 mb-3">
+                <p class="custom-header"><strong>Balance:</strong> {{ usd(balance) }}</p>
+                <p class="custom-header"><strong>Total:</strong> {{ usd(balance + total) }}</p>
+            </div>
+        </div>
+    {% else %}
+        <div>
+            <h2 class="custom-h2 mb-5"><strong>Your portfolio</strong></h2>
+            <h5 class="custom-header">No portfolio yet</h3>
+            <h5 class="custom-header mt-3">Balance: <span class="ms-3">{{ usd(balance) }}</span></h5>
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add
+{% endblock %}
+
+{% block main %}
+    <div class="d-flex justify-content-center mb-3">
+        <h1>Add balance</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <form action="/add_balance" method="post" class="d-flex">
+            <input autocomplete="off" autofocus class="form-control w-auto" style="width: 200px; margin-right: 10px;" name="add" placeholder="Sum">
+            <button type="submit" class="btn btn-outline-primary">Add</button>
+        </form>
+    </div>
+
+    {% if error %}
+        <div class="alert alert-danger alert-dismissible fade show mx-auto w-auto" role="alert">
+            <strong>{{ error }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Display
+{% endblock %}
+
+{% block main %}
+    <div class="d-flex justify-content-center mb-3">
+        <h1>Find stock</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <form action="/quote" method="post" class="d-flex">
+            <input autocomplete="off" autofocus class="form-control" style="width: 200px; margin-right: 10px;" name="symbol" placeholder="Stock name">
+            <button type="submit" class="btn btn-outline-primary">Find</button>
+        </form>
+    </div>
+
+    {% if error %}
+        <div class="d-flex justify-content-center mt-3">
+            <div class="alert alert-danger alert-dismissible fade show" style="width: 200px;" role="alert">
+                <strong>{{ error }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

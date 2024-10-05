@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <div class="d-flex justify-content-center mb-3">
+        <h1>Buy stock</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <form action="/buy" method="post" class="d-flex">
+            <input autocomplete="off" autofocus class="form-control" style="width: 130px; margin-right: 10px;" name="symbol" placeholder="Stock name">
+            <input autocomplete="off" class="form-control" style="width: 94px; margin-right: 10px;" name="shares" placeholder="Shares" type="number" min="0">
+            <button type="submit" class="btn btn-outline-primary">Buy</button>
+        </form>
+    </div>
+
+    {% if error %}
+        <div class="d-flex justify-content-center mt-3">
+            <div class="alert alert-danger alert-dismissible fade show" style="width: 300px;" role="alert">
+                <strong>{{ error }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

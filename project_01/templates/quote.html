@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stock display
+{% endblock %}
+
+{% block main %}
+    <div>
+        {% if stock %}
+        <h2 style="text-align: left;"> {{ stock['symbol'] }} </h2>
+            <table>
+                <tr>
+                    <p style="text-align: left;"> Price: {{ stock['price'] }} </p>
+                    <p style="text-align: left;"> Symbol: {{ stock['symbol'] }} </p>
+                </tr>
+            </table>
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}

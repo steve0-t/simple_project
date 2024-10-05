@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <div class="d-flex justify-content-center mb-3">
+        <h1>History</h1>
+    </div>
+    <div class="table-responsive">
+        <div class="d-flex justify-content-center">
+            <table class="table table-success table-striped table-hover table-sm">
+                <thead>
+                    <div>
+                        <tr>
+                            <th scope="col">Transaction type</th>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Date and Time</th>
+                        </tr>
+                    </div>
+                </thead>
+                <tbody>
+                    {% for item in history %}
+                        <tr>
+                            <td> {{ item['transaction_type'] }} </td>
+                            <td> {{ item['symbol'] }} </td>
+                            <td> {{ usd(item['price']) }} </td>
+                            <td> {{ item['amount'] }} </td>
+                            <td> {{ item['date_and_time'] }} </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% if error %}
+        <div class="d-flex justify-content-center mt-3">
+            <div class="alert alert-danger alert-dismissible fade show" style="width: 300px;" role="alert">
+                <strong>{{ error }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

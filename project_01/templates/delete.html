@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete Account
+{% endblock %}
+
+{% block main %}
+    <h1 class="mb-3">Delete account</h1>
+
+    <!-- Modal -->
+    <div class="modal fade" id="deletion" tabindex="-1" aria-labelledby="deletionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <strong>
+                        <p style="color: #990011">Are you ceratin you wish to delete your account?</p>
+                        <p style="color: #990011">This change cannot be reverted!</p>
+                    </strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">Close</button>
+                    <button type="button" class="btn btn-danger" id="proceed" onclick="confirmDelete(event)">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+
+    <form id="deleteForm" action="/delete" method="post">
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm password" type="password">
+        </div>
+        {% if error %}
+            <div class="d-flex justify-content-center mt-3">
+                <div class="alert alert-danger alert-dismissible fade show" style="width: 370px;" role="alert">
+                    <strong>{{ error }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        {% endif %}
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletion">
+            Delete
+        </button>
+    </form>
+{% endblock %}
